@@ -8,10 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = AwsMfaSecure::VERSION
   spec.authors       = ["Tung Nguyen"]
   spec.email         = ["tongueroo@gmail.com"]
-  spec.summary       = "Generated with cli-template tool. Please write a gem summary"
-  spec.description   = "Generated with cli-template tool. Write a longer description or delete this line."
-  spec.homepage      = ""
-  spec.license       = ""
+  spec.summary       = "Adds MFA Support to AWS CLI and Ruby SDKs for normal IAM user"
+  spec.homepage      = "https://github.com/tongueroo/aws-mfa-secure"
+  spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
   spec.bindir        = "exe"
