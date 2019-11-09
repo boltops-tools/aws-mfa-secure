@@ -23,6 +23,8 @@ Set up alias:
 
     alias aws="aws-mfa-secure session"
 
+Autocompletion still works with the alias.
+
 Call `aws` command like you normally would:
 
     aws s3 ls
@@ -39,11 +41,9 @@ Example with output:
 
 You get prompted for the MFA token once and the MFA secure session lasts for 12 hours. You can override the default expiration time with `AWS_MFA_TTL`. For example, `AWS_MFA_TTL=3600` means the session expires in 1 hour instead.
 
-Autocompletion still works with the alias.
-
 ## Calling Directly
 
-You can also call `aws-mfa-secure session` directly.
+You can also call `aws-mfa-secure session` directly. The arguments are delegated to the aws cli. 
 
     aws-mfa-secure session --version
     aws-mfa-secure session s3 ls
