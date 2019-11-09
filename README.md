@@ -31,7 +31,7 @@ Set up `mfa_serial` in credentials file for the profile section that requires it
     aws_secret_access_key = ABCDl4hXikfOHTvNqFAnb2Ea62bUuu/eUEXAMPLE
     mfa_serial = arn:aws:iam::112233445566:mfa/MFAUser
 
-Note: AWS already supports `mfa_serial` assumed roles: [AWS Configuration and Credential File Settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).  The aws-mfa-secure tool does not decorate for assumed roles and lets the AWS CLI or SDK handle it.  The aws-mfa-secure tool adds support for standard IAM users, which is not currently supported. See: [boto/botocore/pull/1399](https://github.com/boto/botocore/pull/1399)
+Note: AWS already supports `mfa_serial` for assumed roles: [AWS Configuration and Credential File Settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).  The aws-mfa-secure tool does not decorate for assumed roles and lets the AWS CLI or SDK handle it.  The aws-mfa-secure tool adds support for standard IAM users, which is not currently supported. See: [boto/botocore/pull/1399](https://github.com/boto/botocore/pull/1399)
 
 ### Set up bash alias
 
