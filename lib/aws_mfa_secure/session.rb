@@ -44,6 +44,7 @@ module AwsMfaSecure
 
       aws_access_key_id && aws_secret_access_key && !role_arn && !source_profile
     end
+    memoize :iam_mfa?
 
     def fetch_creds?
       !good_session_creds?
@@ -94,8 +95,7 @@ module AwsMfaSecure
     end
 
     def mfa_serial
-      mfa_serial = aws_configure_get(:mfa_serial)
-      return mfa_serial unless mfa_serial.empty?
+      aws_configure_get(:mfa_serial)
     end
     memoize :mfa_serial
 
@@ -106,7 +106,8 @@ module AwsMfaSecure
 
     # Note the strip
     def aws_configure_get(prop)
-      `aws configure get #{prop}`.strip
+      v = `aws configure get #{prop}`.strip
+      v unless v.empty?
     end
   end
 end
