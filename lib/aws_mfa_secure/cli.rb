@@ -6,6 +6,12 @@ module AwsMfaSecure
       Session.new(options, *argv).run
     end
 
+    desc "exports", "Generate export statements that can be eval"
+    long_desc Help.text(:exports)
+    def exports
+      Exports.new(options).run
+    end
+
     desc "completion *PARAMS", "Prints words for auto-completion."
     long_desc Help.text("completion")
     def completion(*params)
