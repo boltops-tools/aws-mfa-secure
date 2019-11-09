@@ -78,7 +78,7 @@ Except `aws-mfa-secure session` will use the temporary session environment `AWS_
 
 ## Exports
 
-You can also generate the exports script.
+You can also generate an exports script. The exports technique is useful for tools that do not yet support MFA.  Using `AWS_*` env variables for credentials should allow those tools to work. Though, it may depend on the tool as they sometimes hardcode a credentials configuration.  Example:
 
     $ aws-mfa-secure exports
     Please provide your MFA code: 147280
