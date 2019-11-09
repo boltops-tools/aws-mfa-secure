@@ -111,7 +111,7 @@ You can also set the MFA info with env variables. They take the highest preceden
 
 ## How It Works
 
-docs: [How It Works](docs/how-it-works.md)
+Docs: [How It Works](docs/how-it-works.md)
 
 ## Related
 
