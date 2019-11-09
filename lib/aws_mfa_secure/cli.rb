@@ -1,14 +1,9 @@
 module AwsMfaSecure
   class CLI < Command
-    class_option :verbose, type: :boolean
-    class_option :noop, type: :boolean
-
-    desc "hello NAME", "Say hello to NAME."
-    long_desc Help.text(:hello)
-    option :from, desc: "from person"
-    def hello(name="you")
-      puts "from: #{options[:from]}" if options[:from]
-      puts "Hello #{name}"
+    desc "session *ARGV", "Calls aws cli with a MFA secure session"
+    long_desc Help.text(:session)
+    def session(*argv)
+      Session.new(options, *argv).run
     end
 
     desc "completion *PARAMS", "Prints words for auto-completion."
