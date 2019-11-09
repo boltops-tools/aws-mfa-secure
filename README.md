@@ -41,7 +41,7 @@ You may want to add the alias to your `~/.bash_profile`
 
 Autocompletion still works with the alias.
 
-### Use aws cli like normal
+### Use aws cli like normally would
 
 Call `aws` command like you usually would:
 
