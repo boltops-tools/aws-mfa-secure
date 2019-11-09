@@ -15,7 +15,7 @@ module AwsMfaSecure
     end
 
     def run
-      unless mfa_serial
+      unless iam_mfa?
         exec(*@argv) # will never get pass this point if there's no mfa_serial setting
       end
 
@@ -29,6 +29,20 @@ module AwsMfaSecure
       ENV['AWS_SECRET_ACCESS_KEY'] ||= credentials["secret_access_key"]
       ENV['AWS_SESSION_TOKEN']     ||= credentials["session_token"]
       exec(*@argv)
+    end
+
+    def iam_mfa?
+      return false unless mfa_serial
+
+      # The iam_mfa? check will only return true for the case when mfa_serial is set and access keys are used.
+      # This is because for assume role cases, the current aws cli tool supports mfa_serial already.
+      # Sending session AWS based access keys intefere with the current aws cli assume role mfa_serial support
+      aws_access_key_id = aws_configure_get(:aws_access_key_id)
+      aws_secret_access_key = aws_configure_get(:aws_secret_access_key)
+      role_arn = aws_configure_get(:role_arn)
+      source_profile = aws_configure_get(:source_profile)
+
+      aws_access_key_id && aws_secret_access_key && !role_arn && !source_profile
     end
 
     def fetch_creds?
@@ -80,7 +94,7 @@ module AwsMfaSecure
     end
 
     def mfa_serial
-      mfa_serial = sh("aws configure get mfa_serial")
+      mfa_serial = aws_configure_get(:mfa_serial)
       return mfa_serial unless mfa_serial.empty?
     end
     memoize :mfa_serial
@@ -90,8 +104,9 @@ module AwsMfaSecure
     end
     memoize :sts
 
-    def sh(command)
-      `#{command}`.strip
+    # Note the strip
+    def aws_configure_get(prop)
+      `aws configure get #{prop}`.strip
     end
   end
 end
