@@ -12,6 +12,12 @@ module AwsMfaSecure
       Exports.new(options).run
     end
 
+    desc "unsets", "Generate unsets statements that can be eval"
+    long_desc Help.text(:unsets)
+    def unsets
+      Unsets.new(options).run
+    end
+
     desc "completion *PARAMS", "Prints words for auto-completion."
     long_desc Help.text("completion")
     def completion(*params)
