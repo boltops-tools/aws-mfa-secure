@@ -15,19 +15,24 @@ module AwsMfaSecure
     end
 
     def run
+      unless mfa_serial
+        exec(*@argv) # will never get pass this point if there's no mfa_serial setting
+      end
+
       if fetch_creds?
         resp = get_session_token
         save_creds(resp.credentials.to_h)
       end
 
-      ENV['AWS_ACCESS_KEY_ID']     = credentials["access_key_id"]
-      ENV['AWS_SECRET_ACCESS_KEY'] = credentials["secret_access_key"]
-      ENV['AWS_SESSION_TOKEN']     = credentials["session_token"]
+      # Set AWS_ values unless alredy set
+      ENV['AWS_ACCESS_KEY_ID']     ||= credentials["access_key_id"]
+      ENV['AWS_SECRET_ACCESS_KEY'] ||= credentials["secret_access_key"]
+      ENV['AWS_SESSION_TOKEN']     ||= credentials["session_token"]
       exec(*@argv)
     end
 
     def fetch_creds?
-      mfa_serial && !good_session_creds?
+      !good_session_creds?
     end
 
     def good_session_creds?
@@ -56,11 +61,12 @@ module AwsMfaSecure
       begin
         print "Please provide your MFA code: "
         token_code = $stdin.gets.strip
-        sts.get_session_token(
-          # duration_seconds: 3600,
+        options = {
           serial_number: mfa_serial,
           token_code: token_code,
-        )
+        }
+        options[:duration_seconds] = ENV['AWS_MFA_TTL'] if ENV['AWS_MFA_TTL']
+        sts.get_session_token(options)
       rescue Aws::STS::Errors::ValidationError, Aws::STS::Errors::AccessDenied => e
         puts "#{e.class}: #{e.message}"
         puts "Incorrect MFA code.  Please try again."
