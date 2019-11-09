@@ -18,7 +18,7 @@ Prerequisite: The [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/) i
 
 1. Configure `~/.aws/credentials` with `mfa_serial`
 2. Set up bash alias
-3. Use aws cli like normal
+3. Use aws cli like normally would
 
 ### Configure ~/.aws/credentials with mfa_serial
 
@@ -41,7 +41,7 @@ You may want to add the alias to your `~/.bash_profile`
 
 Autocompletion still works with the alias.
 
-### Use aws cli like normally would
+### Use aws cli like usual
 
 Call `aws` command like you usually would:
 
