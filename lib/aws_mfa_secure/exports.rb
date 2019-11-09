@@ -6,6 +6,11 @@ module AwsMfaSecure
     end
 
     def run
+      unless iam_mfa?
+        puts "WARN: mfa_serial is not configured for this AWS_PROFILE=#{@aws_profile}"
+        return
+      end
+
       if fetch_creds?
         resp = get_session_token
         save_creds(resp.credentials.to_h)
