@@ -31,7 +31,7 @@ Set up `mfa_serial` in credentials file for the profile section that requires it
     aws_secret_access_key = ABCDl4hXikfOHTvNqFAnb2Ea62bUuu/eUEXAMPLE
     mfa_serial = arn:aws:iam::112233445566:mfa/MFAUser
 
-Note: AWS already supports `mfa_serial` assumed roles: [AWS Configuration and Credential File Settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).  The aws-mfa-secure tool does not interfere with assumed roles and lets the AWS CLI or SDK handle it.
+Note: AWS already supports `mfa_serial` assumed roles: [AWS Configuration and Credential File Settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).  The aws-mfa-secure tool does not decorate for assumed roles and lets the AWS CLI or SDK handle it.
 
 ### Set up bash alias
 
@@ -43,7 +43,7 @@ Autocompletion still works with the alias.
 
 ### Use aws cli like normal
 
-Call `aws` command like you normally would:
+Call `aws` command like you usually would:
 
     aws s3 ls
 
