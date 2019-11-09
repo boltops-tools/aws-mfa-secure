@@ -20,10 +20,9 @@ module AwsMfaSecure
       # Sending session AWS based access keys intefere with the current aws cli assume role mfa_serial support
       aws_access_key_id = aws_configure_get(:aws_access_key_id)
       aws_secret_access_key = aws_configure_get(:aws_secret_access_key)
-      role_arn = aws_configure_get(:role_arn)
       source_profile = aws_configure_get(:source_profile)
 
-      aws_access_key_id && aws_secret_access_key && !role_arn && !source_profile
+      aws_access_key_id && aws_secret_access_key && !source_profile
     end
 
     def fetch_creds?
@@ -115,6 +114,7 @@ module AwsMfaSecure
     memoize :sts
 
     # Note the strip
+    # Each aws configure get call has about a 300-400ms overhead so we memoize it.
     def aws_configure_get(prop)
       v = `aws configure get #{prop}`.strip
       v unless v.empty?
