@@ -8,3 +8,5 @@ AwsMfaSecure::Autoloader.setup
 module AwsMfaSecure
   class Error < StandardError; end
 end
+
+require "#{Dir.pwd}/spec/monkey_patches" if ENV['AWS_MFA_SECURE_TEST']

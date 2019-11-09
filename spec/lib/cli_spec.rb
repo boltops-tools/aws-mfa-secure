@@ -1,26 +1,18 @@
 describe AwsMfaSecure::CLI do
-  before(:all) do
-    @args = "--from Tung"
-  end
-
   describe "aws-mfa-secure" do
-    it "hello" do
-      out = execute("exe/aws-mfa-secure hello world #{@args}")
-      expect(out).to include("from: Tung\nHello world")
+    it "exports" do
+      out = execute("exe/aws-mfa-secure exports")
+      expect(out).to include("AWS_ACCESS_KEY_ID")
     end
 
-    commands = {
-      "hell" => "hello",
-      "hello" => "name",
-      "hello -" =>  "--from",
-      "hello name" => "--from",
-      "hello name --" => "--from",
-    }
-    commands.each do |command, expected_word|
-      it "completion #{command}" do
-        out = execute("exe/aws-mfa-secure completion #{command}")
-        expect(out).to include(expected_word) # only checking for one word for simplicity
-      end
+    it "unsets" do
+      out = execute("exe/aws-mfa-secure unsets")
+      expect(out).to include("AWS_ACCESS_KEY_ID")
+    end
+
+    it "session" do
+      out = execute("exe/aws-mfa-secure session --version 2>&1")
+      expect(out).to include("aws-cli")
     end
   end
 end

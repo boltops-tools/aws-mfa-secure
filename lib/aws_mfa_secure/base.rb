@@ -6,6 +6,7 @@ require "time"
 require "active_support/core_ext/string"
 require "active_support/core_ext/hash"
 
+puts "AwsMfaSecure"
 module AwsMfaSecure
   class MfaError < StandardError; end
 
