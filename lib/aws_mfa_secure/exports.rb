@@ -7,7 +7,7 @@ module AwsMfaSecure
 
     def run
       unless iam_mfa?
-        puts "WARN: mfa_serial is not configured for this AWS_PROFILE=#{@aws_profile}"
+        $stderr.puts "WARN: mfa_serial is not configured for this AWS_PROFILE=#{@aws_profile}"
         return
       end
 

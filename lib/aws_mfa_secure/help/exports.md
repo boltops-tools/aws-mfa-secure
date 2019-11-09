@@ -16,3 +16,14 @@ Eval example:
     $ eval `aws-mfa-secure exports`
 
 Note: Prompts write to stderr so eval-ing the exports works even if with the prompt.
+
+## Related
+
+You may also be interested in the `aws-mfa-secure unset` command. It provides a quick way to unset the AWS_* environment variables.  Example:
+
+    $ aws-mfa-secure unset # generates script
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SESSION_TOKEN
+    $ eval `aws-mfa-secure unset` # to unset
+    $

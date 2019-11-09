@@ -54,8 +54,7 @@ module AwsMfaSecure
     def get_session_token(shell: false)
       retries = 0
       begin
-        $stderr.print "Please provide your MFA code: "
-        token_code = $stdin.gets.strip
+        token_code = mfa_prompt
         options = {
           serial_number: mfa_serial,
           token_code: token_code,
@@ -79,6 +78,16 @@ module AwsMfaSecure
       end
     end
 
+    def mfa_prompt
+      if ENV['AWS_MFA_TOKEN']
+        token_code = ENV.delete('AWS_MFA_TOKEN') # only use once, prompt afterwards if incorrect
+        return token_code
+      end
+
+      $stderr.print "Please provide your MFA code: "
+      $stdin.gets.strip
+    end
+
     def shell_get_session_token(options, token_code)
       args = options.map { |k,v| "--#{k.to_s.gsub('_','-')} #{v}" }.join(' ')
       command = "aws sts get-session-token #{args} 2>&1"
@@ -97,7 +106,7 @@ module AwsMfaSecure
     end
 
     def mfa_serial
-      aws_configure_get(:mfa_serial)
+      ENV['AWS_MFA_SERIAL'] || aws_configure_get(:mfa_serial)
     end
 
     def sts
