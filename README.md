@@ -61,7 +61,7 @@ Expiration: You get prompted for the MFA token once, and the MFA secure session 
 
 ## Calling Directly
 
-You can also call `aws-mfa-secure session` directly. The arguments are delegated to the aws cli.
+You can also call `aws-mfa-secure session` directly.
 
     aws-mfa-secure session --version
     aws-mfa-secure session s3 ls
