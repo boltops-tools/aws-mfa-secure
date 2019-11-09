@@ -18,7 +18,7 @@ Prerequisite: The [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/) i
 
 1. Configure `~/.aws/credentials` with `mfa_serial`
 2. Set up bash alias
-3. Use aws cli like normally would
+3. Use aws cli like you normally would
 
 ### Configure ~/.aws/credentials with mfa_serial
 
