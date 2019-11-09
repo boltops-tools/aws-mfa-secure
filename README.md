@@ -29,7 +29,7 @@ Set up `mfa_serial` in credentials file for the profile section that requires it
     [mfa]
     aws_access_key_id = BKCAXZ6ODJLQ1EXAMPLE
     aws_secret_access_key = ABCDl4hXikfOHTvNqFAnb2Ea62bUuu/eUEXAMPLE
-    mfa_serial = arn:aws:iam::536766270177:mfa/MFAUser
+    mfa_serial = arn:aws:iam::112233445566:mfa/MFAUser
 
 Note: AWS already supports `mfa_serial` assumed roles: [AWS Configuration and Credential File Settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).  The aws-mfa-secure tool does not interfere with assumed roles and lets the AWS CLI or SDK handle it.
 
@@ -112,6 +112,10 @@ You can also set the MFA info with env variables. They take the highest preceden
 ## How It Works
 
 docs: [How It Works](docs/how-it-works.md)
+
+## Related
+
+You may also be interested in [tongueroo/aws-rotate](https://github.com/tongueroo/aws-rotate). It's an easy way to rotate all your AWS keys in your `~/.aws/credentials`.
 
 ## Contributing
 
