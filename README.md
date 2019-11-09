@@ -107,7 +107,7 @@ This patches the aws-sdk-ruby library and adds MFA support.
 
 You can also set the MFA info with env variables. They take the highest precedence and override what's in `~/.aws/credentials`. Example:
 
-    AWS_MFA_TOKEN=112233 arn:aws:iam::112233445566:mfa/MFAUser aws s3 ls
+    AWS_MFA_TOKEN=112233 AWS_MFA_SERIAL=arn:aws:iam::112233445566:mfa/MFAUser aws s3 ls
 
 ## How It Works
 
