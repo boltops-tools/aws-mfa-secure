@@ -3,8 +3,12 @@ require "fileutils"
 require "json"
 require "memoist"
 require "time"
+require "active_support/core_ext/string"
+require "active_support/core_ext/hash"
 
 module AwsMfaSecure
+  class MfaError < StandardError; end
+
   class Base
     extend Memoist
 
@@ -47,7 +51,7 @@ module AwsMfaSecure
       "#{ENV['HOME']}/.aws/aws-mfa-secure-sessions/#{@aws_profile}"
     end
 
-    def get_session_token
+    def get_session_token(shell: false)
       retries = 0
       begin
         $stderr.print "Please provide your MFA code: "
@@ -57,8 +61,13 @@ module AwsMfaSecure
           token_code: token_code,
         }
         options[:duration_seconds] = ENV['AWS_MFA_TTL'] if ENV['AWS_MFA_TTL']
-        sts.get_session_token(options)
-      rescue Aws::STS::Errors::ValidationError, Aws::STS::Errors::AccessDenied => e
+
+        if shell
+          shell_get_session_token(options, token_code) # mimic ruby sdk
+        else # ruby sdk
+          sts.get_session_token(options)
+        end
+      rescue Aws::STS::Errors::ValidationError, Aws::STS::Errors::AccessDenied, MfaError => e
         $stderr.puts "#{e.class}: #{e.message}"
         $stderr.puts "Incorrect MFA code.  Please try again."
         retries += 1
@@ -68,6 +77,23 @@ module AwsMfaSecure
         end
         retry
       end
+    end
+
+    def shell_get_session_token(options, token_code)
+      args = options.map { |k,v| "--#{k.to_s.gsub('_','-')} #{v}" }.join(' ')
+      command = "aws sts get-session-token #{args} 2>&1"
+      # puts "=> #{command}" # uncomment for debugging
+      out = `#{command}`
+
+      unless out.include?("Credentials")
+        raise(MfaError, out.strip) # custom error
+      end
+
+      data = JSON.load(out)
+      resp = data.deep_transform_keys { |k| k.underscore }
+      # mimic ruby sdk resp
+      credentials = Aws::STS::Types::Credentials.new(resp["credentials"])
+      Aws::STS::Types::GetSessionTokenResponse.new(credentials: credentials)
     end
 
     def mfa_serial

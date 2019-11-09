@@ -12,7 +12,7 @@ module AwsMfaSecure
       end
 
       if fetch_creds?
-        resp = get_session_token
+        resp = get_session_token(shell: true)
         save_creds(resp.credentials.to_h)
       end
 

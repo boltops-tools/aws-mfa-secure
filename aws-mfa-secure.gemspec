@@ -31,16 +31,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "cli_markdown"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if gem.respond_to?(:metadata)
-    # gem.metadata["allowed_push_host"] = ""
-
-    gem.metadata["homepage_uri"] = gem.homepage
-    gem.metadata["source_code_uri"] = ""
-    gem.metadata["changelog_uri"] = ""
-  else
-    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
-  end
 end
