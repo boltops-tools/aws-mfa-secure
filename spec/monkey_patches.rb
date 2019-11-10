@@ -2,7 +2,8 @@ AwsMfaSecure::Base # autoload
 module AwsMfaSecure
   class Base
     def session_creds_path
-      "#{Dir.pwd}/spec/fixtures/aws-mfa-secure-sessions/fake_credentials"
+      root = File.expand_path("../", __dir__)
+      "#{root}/spec/fixtures/aws-mfa-secure-sessions/fake_credentials"
     end
 
     def fetch_creds?

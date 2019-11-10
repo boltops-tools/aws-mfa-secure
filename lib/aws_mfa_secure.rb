@@ -13,4 +13,5 @@ module AwsMfaSecure
   class Error < StandardError; end
 end
 
-require "#{Dir.pwd}/spec/monkey_patches" if ENV['AWS_MFA_SECURE_TEST']
+root = File.expand_path("../", __dir__)
+require "#{root}/spec/monkey_patches" if ENV['AWS_MFA_SECURE_TEST']
