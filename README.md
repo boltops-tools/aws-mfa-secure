@@ -93,7 +93,7 @@ You can eval it to set the environment variables in one go. Note, the MFA code p
 
 If you're using the `aws-mfa-secure exports` command, the `aws-mfa-secure unsets` command is useful to unset the `AWS_*` env variables quickly.  For more info: `aws-mfa-secure unsets -h`.
 
-## AWS Extension
+## Ruby AWS SDK Extension
 
 You can also use `aws-mfa-secure` to add MFA support to Ruby libraries. Do so by requiring the `aws_mfa_secure/ext/aws`.
 
