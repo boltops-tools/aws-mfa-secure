@@ -16,10 +16,9 @@ module AwsMfaSecure
         save_creds(resp.credentials.to_h)
       end
 
-      # Set AWS_ values unless alredy set
-      ENV['AWS_ACCESS_KEY_ID']     ||= credentials["access_key_id"]
-      ENV['AWS_SECRET_ACCESS_KEY'] ||= credentials["secret_access_key"]
-      ENV['AWS_SESSION_TOKEN']     ||= credentials["session_token"]
+      ENV['AWS_ACCESS_KEY_ID']     = credentials["access_key_id"]
+      ENV['AWS_SECRET_ACCESS_KEY'] = credentials["secret_access_key"]
+      ENV['AWS_SESSION_TOKEN']     = credentials["session_token"]
       exec(*@argv)
     end
   end
