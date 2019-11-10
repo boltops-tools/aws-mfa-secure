@@ -26,6 +26,7 @@ module AwsMfaSecure
     def aws_cli_installed?
       return false unless File.exist?("#{ENV['HOME']}/.aws")
       return false unless system("type aws > /dev/null 2>&1")
+      true
     end
 
     def fetch_creds?
