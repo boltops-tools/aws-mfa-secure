@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.3.4]
+- always set AWS_* env vars when in iam_mfa mode
+
 ## [0.3.3]
 - fix aws_cli_installed? check
 
