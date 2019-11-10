@@ -11,7 +11,7 @@ Surprisingly, the [aws cli](https://docs.aws.amazon.com/cli/latest/reference/) d
 Prerequisite: The [AWS CLI](https://docs.aws.amazon.com/cli/latest/reference/) is required. You can install the AWS CLI via pip.
 
     pip install awscli --upgrade --user
-
+    
 ## Usage
 
 **Summary**:
@@ -112,6 +112,13 @@ You can also set the MFA info with env variables. They take the highest preceden
 ## How It Works
 
 Docs: [How It Works](docs/how-it-works.md)
+
+## Linux Support
+
+This tool only supports Linux. For Windows, you'll have to set the `AWS_*` env variables manually. Refer to these resources:
+
+* [Switching to an IAM Role (Tools for Windows PowerShell)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-twp.html)
+* [How do I use an MFA token to authenticate access to my AWS resources through the AWS CLI?](https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/)
 
 ## Related
 
