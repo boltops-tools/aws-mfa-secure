@@ -44,6 +44,7 @@ module AwsMfaSecure
     def save_creds(credentials)
       FileUtils.mkdir_p(File.dirname(session_creds_path))
       IO.write(session_creds_path, JSON.pretty_generate(credentials))
+      flush_cache # Clear memo cache. Not needed for brand new temp credentials, but needed when updating existing ones
     end
 
     def session_creds_path
@@ -61,7 +62,7 @@ module AwsMfaSecure
         options[:duration_seconds] = ENV['AWS_MFA_TTL'] if ENV['AWS_MFA_TTL']
 
         if shell
-          shell_get_session_token(options, token_code) # mimic ruby sdk
+          shell_get_session_token(options) # mimic ruby sdk
         else # ruby sdk
           sts.get_session_token(options)
         end
@@ -87,7 +88,8 @@ module AwsMfaSecure
       $stdin.gets.strip
     end
 
-    def shell_get_session_token(options, token_code)
+    # Credentials class uses this version of get-session-token to allow the AWS Ruby SDK itself to be patched.
+    def shell_get_session_token(options)
       args = options.map { |k,v| "--#{k.to_s.gsub('_','-')} #{v}" }.join(' ')
       command = "aws sts get-session-token #{args} 2>&1"
       # puts "=> #{command}" # uncomment for debugging
