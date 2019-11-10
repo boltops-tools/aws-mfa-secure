@@ -1,5 +1,7 @@
 # AWS MFA Secure
 
+[![Watch the video](https://img.boltops.com/boltopspro/youtube/aws-mfa.png)](https://www.youtube.com/watch?v=cYqKeMUS9pc)
+
 [![Gem Version](https://badge.fury.io/rb/aws-mfa-secure.png)](http://badge.fury.io/rb/aws-mfa-secure)
 
 Surprisingly, the [aws cli](https://docs.aws.amazon.com/cli/latest/reference/) does not yet support MFA for normal IAM users. See: [boto/botocore/pull/1399](https://github.com/boto/botocore/pull/1399)  The aws-mfa-secure tool decorates the AWS CLI or API to handle MFA authentication.  The MFA prompt only activates if `mfa_serial` is configured.
