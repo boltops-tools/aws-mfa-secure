@@ -18,6 +18,12 @@ module AwsMfaSecure
       Unsets.new(options).run
     end
 
+    desc "clean", "Cleans/purges the ~/.aws/aws-mfa-secure-sessions"
+    long_desc Help.text(:clean)
+    def clean
+      Clean.new(options).run
+    end
+
     desc "completion *PARAMS", "Prints words for auto-completion."
     long_desc Help.text("completion")
     def completion(*params)

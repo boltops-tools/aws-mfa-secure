@@ -1,10 +1,7 @@
 require "aws-sdk-core"
-require "fileutils"
 require "json"
 require "memoist"
 require "time"
-require "active_support/core_ext/string"
-require "active_support/core_ext/hash"
 
 module AwsMfaSecure
   class MfaError < StandardError; end
@@ -48,7 +45,7 @@ module AwsMfaSecure
     end
 
     def session_creds_path
-      "#{ENV['HOME']}/.aws/aws-mfa-secure-sessions/#{@aws_profile}"
+      "#{SESSIONS_PATH}/#{@aws_profile}"
     end
 
     def get_session_token(shell: false)
