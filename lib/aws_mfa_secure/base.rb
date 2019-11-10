@@ -10,6 +10,7 @@ module AwsMfaSecure
     extend Memoist
 
     def iam_mfa?
+      return false unless aws_cli_installed?
       return false unless mfa_serial
 
       # The iam_mfa? check will only return true for the case when mfa_serial is set and access keys are used.
@@ -20,6 +21,11 @@ module AwsMfaSecure
       source_profile = aws_configure_get(:source_profile)
 
       aws_access_key_id && aws_secret_access_key && !source_profile
+    end
+
+    def aws_cli_installed?
+      return false unless File.exist?("#{ENV['HOME']}/.aws")
+      return false unless system("type aws > /dev/null 2>&1")
     end
 
     def fetch_creds?
