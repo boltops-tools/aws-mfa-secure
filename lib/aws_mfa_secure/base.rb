@@ -10,6 +10,7 @@ module AwsMfaSecure
     extend Memoist
 
     def iam_mfa?
+      return true if aws_mfa_env_set?
       return false unless aws_cli_installed?
       return false unless mfa_serial
 
@@ -21,6 +22,12 @@ module AwsMfaSecure
       source_profile = aws_configure_get(:source_profile)
 
       aws_access_key_id && aws_secret_access_key && !source_profile
+    end
+
+    def aws_mfa_env_set?
+      ENV['AWS_ACCESS_KEY_ID'] &&
+      ENV['AWS_SECRET_ACCESS_KEY'] &&
+      ENV['AWS_MFA_SERIAL']
     end
 
     def aws_cli_installed?
