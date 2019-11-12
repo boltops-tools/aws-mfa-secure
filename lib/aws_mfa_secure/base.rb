@@ -1,4 +1,5 @@
 require "aws-sdk-core"
+require "aws_config"
 require "json"
 require "memoist"
 require "time"
@@ -17,9 +18,9 @@ module AwsMfaSecure
       # The iam_mfa? check will only return true for the case when mfa_serial is set and access keys are used.
       # This is because for assume role cases, the current aws cli tool supports mfa_serial already.
       # Sending session AWS based access keys intefere with the current aws cli assume role mfa_serial support
-      aws_access_key_id = aws_configure_get(:aws_access_key_id)
-      aws_secret_access_key = aws_configure_get(:aws_secret_access_key)
-      source_profile = aws_configure_get(:source_profile)
+      aws_access_key_id = aws_config(:aws_access_key_id)
+      aws_secret_access_key = aws_config(:aws_secret_access_key)
+      source_profile = aws_config(:source_profile)
 
       aws_access_key_id && aws_secret_access_key && !source_profile
     end
@@ -117,7 +118,7 @@ module AwsMfaSecure
     end
 
     def mfa_serial
-      ENV['AWS_MFA_SERIAL'] || aws_configure_get(:mfa_serial)
+      ENV['AWS_MFA_SERIAL'] || aws_config(:mfa_serial)
     end
 
     def sts
@@ -125,13 +126,11 @@ module AwsMfaSecure
     end
     memoize :sts
 
-    # Note the strip
-    # Each aws configure get call has about a 300-400ms overhead so we memoize it.
-    def aws_configure_get(prop)
-      v = `aws configure get #{prop}`.strip
-      v unless v.empty?
+    def aws_config(prop)
+      v = AWSConfig[aws_profile][prop.to_s]
+      v unless v.blank?
     end
-    memoize :aws_configure_get
+    memoize :aws_config
 
     def aws_profile
       ENV['AWS_PROFILE'] || 'default'
