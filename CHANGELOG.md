@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.3.6]
+- #1 speed up iam_mfa? detection with AWSConfig parser
+
 ## [0.3.5]
 - prompt for mfa when using AWS_* env and `AWS_MFA_SERIAL`
 
