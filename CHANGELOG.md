@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.3.7]
+- check aws cli is fully setup
+
 ## [0.3.6]
 - #1 speed up iam_mfa? detection with AWSConfig parser
 
