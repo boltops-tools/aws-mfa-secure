@@ -12,7 +12,7 @@ module AwsMfaSecure
 
     def iam_mfa?
       return true if aws_mfa_env_set?
-      return false unless aws_cli_installed?
+      return false unless aws_cli_installed? && aws_cli_setup?
       return false unless mfa_serial
 
       # The iam_mfa? check will only return true for the case when mfa_serial is set and access keys are used.
@@ -34,6 +34,11 @@ module AwsMfaSecure
     def aws_cli_installed?
       return false unless File.exist?("#{ENV['HOME']}/.aws")
       system("type aws > /dev/null 2>&1")
+    end
+
+    def aws_cli_setup?
+      File.exist?("#{ENV['HOME']}/.aws/config") &&
+      File.exist?("#{ENV['HOME']}/.aws/credentials")
     end
 
     def fetch_creds?
