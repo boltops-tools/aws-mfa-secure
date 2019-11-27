@@ -132,7 +132,9 @@ module AwsMfaSecure
     memoize :sts
 
     def aws_config(prop)
-      v = AWSConfig[aws_profile][prop.to_s]
+      profile_data = AWSConfig[aws_profile]
+      return unless profile_data
+      v = profile_data[prop.to_s]
       v unless v.blank?
     end
     memoize :aws_config
