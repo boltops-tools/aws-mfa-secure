@@ -13,8 +13,10 @@ module AwsMfaSecure
       def setup
         loader = Zeitwerk::Loader.new
         loader.inflector = Inflector.new
-        loader.push_dir(File.dirname(__dir__)) # lib
-        loader.ignore("#{File.dirname(__dir__)}/aws-mfa-secure.rb")
+        lib = File.dirname(__dir__) # lib
+        loader.push_dir(lib)
+        loader.ignore("#{lib}/aws-mfa-secure.rb")
+        loader.do_not_eager_load("#{lib}/aws_mfa_secure/ext/aws.rb")
         loader.setup
       end
     end
