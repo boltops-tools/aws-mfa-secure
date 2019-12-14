@@ -41,7 +41,7 @@ Note: AWS already supports `mfa_serial` for assumed roles: [AWS Configuration an
 
     alias aws="aws-mfa-secure session"
 
-You may want to add the alias to your `~/.bash_profile`
+The alias allows us to intercept the normal aws cli command and decorate it. The `aws-mfa-secure session` only activates if `mfa_serial` is configured in your `~/.aws/credentials` file. Otherwise, it will pass the command through to the normal aws cli.  You may want to add the alias to your `~/.bash_profile` do you don't have to alias it every time you open a new terminal.
 
 Autocompletion still works with the alias.
 
