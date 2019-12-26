@@ -8,6 +8,8 @@
 
 Surprisingly, the [aws cli](https://docs.aws.amazon.com/cli/latest/reference/) does not yet support MFA for normal IAM users. See: [boto/botocore/pull/1399](https://github.com/boto/botocore/pull/1399)  The aws-mfa-secure tool decorates the AWS CLI or API to handle MFA authentication.  The MFA prompt only activates if `mfa_serial` is configured.
 
+An advantage of the aws-mfa-secure is that it caches the temporary credentials `~/.aws/aws-mfa-secure-sessions` and reuses them until they expire. The expiration is 8 hours by default. This means that when you open a new terminal tab, you won’t have to re-enter the MFA code.
+
 ## Installation
 
     gem install aws-mfa-secure
