@@ -8,6 +8,7 @@ module AwsMfaSecure
 
     desc "exports", "Generate export statements that can be eval"
     long_desc Help.text(:exports)
+    option :mfa, type: :boolean, desc: "Use --no-mfa to bypass the mfa_profile check for a normal get session token call"
     def exports
       Exports.new(options).run
     end
