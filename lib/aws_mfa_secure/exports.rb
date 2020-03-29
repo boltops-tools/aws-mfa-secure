@@ -17,6 +17,7 @@ module AwsMfaSecure
 
       unless iam_mfa?
         $stderr.puts "WARN: mfa_serial is not configured for this AWS_PROFILE=#{@aws_profile}"
+        $stderr.puts "If you want to use exports without this mfa_serial check. Use the --no-mfa option."
         return
       end
 
