@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.4.1]
+- #3 no-mfa option for exports
+
 ## [0.4.0]
 - #2 do not eager load ext/aws.rb
 
