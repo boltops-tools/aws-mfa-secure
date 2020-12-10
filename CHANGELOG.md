@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.4.3] - 2020-12-10
+- [#4](https://github.com/tongueroo/aws-mfa-secure/pull/4) require singleton
+
 ## [0.4.2]
 - add helpful message
 
