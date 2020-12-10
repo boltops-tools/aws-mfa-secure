@@ -1,3 +1,5 @@
+require "singleton"
+
 # Useful for Ruby interfacing
 module AwsMfaSecure
   class Credentials < Base
