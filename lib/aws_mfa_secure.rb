@@ -1,5 +1,6 @@
 $:.unshift(File.expand_path("../", __FILE__))
 require "aws_mfa_secure/version"
+require "active_support"
 require "active_support/core_ext/hash"
 require "active_support/core_ext/string"
 require "fileutils"
