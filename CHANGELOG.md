@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project *tries* to adhere to [Semantic Versioning](http://semver.org/), even before v1.0.
 
+## [0.4.5] - 2024-09-24
+- [#10](https://github.com/tongueroo/aws-mfa-secure/pull/10) fix to support latest version of AWS SDK
+
 ## [0.4.4] - 2022-01-07
 - [#5](https://github.com/tongueroo/aws-mfa-secure/pull/5) fix activesupport require
 
